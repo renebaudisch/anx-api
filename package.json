@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/appnexus/anx-api.git"
+    "url": "https://github.com/renebaudisch/anx-api.git"
   },
   "scripts": {
     "build": "npm run clean && tsc",
