@@ -327,17 +327,16 @@ export class AnxApi {
 
 	public postAll(opts: IOptionsWithPayload, payload?, extendOpts?: IGenericOptions): Promise<any> {
 		return new Promise((resolve, reject) => {
-			const newOpts = _normalizeOpts(opts, extendOpts);
 			let numElements = opts.numElements || 100;
 			let firstOutputTerm;
 			let elements = [];
 			let totalTime = 0;
 
 			const postAll = (startElement) => {
-				newOpts.startElement = startElement;
-				newOpts.numElements = numElements;
+				opts.startElement = startElement;
+				opts.numElements = numElements;
 
-				return this.post(newOpts, extendOpts, payload)
+				return this.post(opts, payload, extendOpts)
 					.then((res) => {
 						if (!statusOk(res.body)) {
 							return reject(res);
@@ -378,7 +377,7 @@ export class AnxApi {
 		});
 	}
 
-	public put(opts: IOptionsWithPayload | string, payload, extendOpts?: IGenericOptions): Promise<IResponse> {
+	public put(opts: IOptionsWithPayload | string, payload?, extendOpts?: IGenericOptions): Promise<IResponse> {
 		return this._request('PUT', opts, extendOpts, payload);
 	}
 
