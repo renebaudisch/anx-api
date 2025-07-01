@@ -328,7 +328,7 @@ export class AnxApi {
 	public postAll(opts: IOptionsWithPayload, payload?, extendOpts?: IGenericOptions): Promise<any> {
 		return new Promise((resolve, reject) => {
 			let numElements = opts.numElements || 100;
-			let firstOutputTerm = /creative-search/.test(opts.uri) ? 'creative' : '';
+			let firstOutputTerm = /creative-search/.test(opts.uri) ? 'creatives' : '';
 			let elements = [];
 			let totalTime = 0;
 
