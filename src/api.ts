@@ -342,7 +342,7 @@ export class AnxApi {
 							return reject(res);
 						}
 						const response = res.body.response;
-						const count = response.count || 0;
+						const count = response.count ?? 0;
 						const outputTerm = response.dbg_info.output_term;
 						if (!firstOutputTerm) {
 							firstOutputTerm = outputTerm;
