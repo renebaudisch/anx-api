@@ -325,6 +325,59 @@ export class AnxApi {
 		return this._request('POST', opts, extendOpts, payload);
 	}
 
+	public postAll(opts: IOptionsWithPayload, payload, extendOpts?: IGenericOptions): Promise<any> {
+		return new Promise((resolve, reject) => {
+			const newOpts = _normalizeOpts(opts, extendOpts);
+			let numElements = opts.numElements || 100;
+			let firstOutputTerm;
+			let elements = [];
+			let totalTime = 0;
+
+			const postAll = (startElement) => {
+				newOpts.startElement = startElement;
+				newOpts.numElements = numElements;
+
+				return this.post(newOpts, payload)
+					.then((res) => {
+						if (!statusOk(res.body)) {
+							return reject(res);
+						}
+						const response = res.body.response;
+						const count = response.count || 0;
+						const outputTerm = response.dbg_info.output_term;
+						if (!firstOutputTerm) {
+							firstOutputTerm = outputTerm;
+						}
+
+						numElements = response.num_elements;
+
+						totalTime += response.dbg_info.time || 0;
+						elements = elements.concat(response[outputTerm]);
+						if (count <= startElement + numElements) {
+							const newResponse = _.assign(
+								{},
+								{
+									count: elements.length,
+									start_element: 0,
+									num_elements: elements.length,
+									dbg_info: _.assign({}, response.dbg_info, {
+										output_term: firstOutputTerm,
+										time: totalTime,
+									}),
+								},
+							);
+							newResponse[firstOutputTerm] = elements;
+							return resolve({ body: { response: newResponse } });
+						}
+						return postAll(startElement + numElements);
+					})
+					.catch(reject);
+			};
+
+			return postAll(0);
+		});
+	}
+
 	public put(opts: IOptionsWithPayload | string, payload, extendOpts?: IGenericOptions): Promise<IResponse> {
 		return this._request('PUT', opts, extendOpts, payload);
 	}

@@ -54,6 +54,7 @@ export declare class AnxApi {
     get(opts: IGenericOptions | string, extendOpts?: IGenericOptions): Promise<IResponse>;
     getAll(opts: IGenericOptions, extendOpts: any): Promise<any>;
     post(opts: IOptionsWithPayload | string, payload: any, extendOpts?: IGenericOptions): Promise<IResponse>;
+    postAll(opts: IOptionsWithPayload, payload: any, extendOpts?: IGenericOptions): Promise<any>;
     put(opts: IOptionsWithPayload | string, payload: any, extendOpts?: IGenericOptions): Promise<IResponse>;
     delete(opts: IGenericOptions | string, extendOpts?: IGenericOptions): Promise<IResponse>;
     login(username: string, password: string): Promise<string>;
