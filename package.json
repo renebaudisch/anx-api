@@ -1,6 +1,6 @@
 {
   "name": "anx-api",
-  "version": "8.0.7",
+  "version": "8.2.1",
   "description": "AppNexus Api Wrapper",
   "homepage": "https://github.com/appnexus/anx-api",
   "bugs": "https://github.com/appnexus/anx-api/issues",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/renebaudisch/anx-api.git"
+    "url": "https://github.com/appnexus/anx-api.git"
   },
   "scripts": {
     "build": "npm run clean && tsc",
@@ -40,7 +40,7 @@
     }
   ],
   "dependencies": {
-    "axios": "^1.12.2",
+    "axios": "1.12.0",
     "lodash": "^4.17.15",
     "qs": "^6.10.3",
     "url-join": "^4.0.1"
@@ -53,7 +53,6 @@
     "@types/url-join": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
-    "coveralls": "^3.1.1",
     "eslint": "^8.19.0",
     "eslint-config-appnexus": "^7.1.1",
     "eslint-plugin-import": "^2.26.0",
