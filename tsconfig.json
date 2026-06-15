@@ -9,7 +9,7 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "module": "commonjs",
-    "moduleResolution": "node",
+    "types": ["node", "jest"],
     "outDir": "./lib",
     "rootDir": "./src",
     "target": "es6",
